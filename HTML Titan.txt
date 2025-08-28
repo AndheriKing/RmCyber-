@@ -1,0 +1,167 @@
+ *****************************    HTML    ********************************
+
+
+HTML 
+````
+What is HTML?
+HTML stands for Hyper Text Markup Language
+HTML is the standard markup language for creating Web pages
+HTML describes the structure of a Web page
+HTML consists of a series of elements
+HTML elements tell the browser how to display the content
+
+
+first project
+
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Titan watch</title>
+
+  </head>
+  <body bgcolor="red">
+    <center>
+    <h1>Taitance</h1>
+      <p>TIME IS MORE IMPORTANCE </p>
+    </center>
+    <hr>
+    <P>
+      Titan Watch Sale - Explore best deals on Titan Watches and enjoy up to 60% off on the latest collection of watches for men and women. Free Shipping, EMI offers, COD, 7-days Return Policy.
+      </p>
+  <center>
+    <h3>To buy a Right Watch</h3>
+    <h4>Right Now</h4>
+  </center>
+  <p>
+    lorem50hrSssshytrjh j k r gyydbdf,r g tju k n h ge5grkewel8t nhi8i hiqfwefh
+  </p>
+  <hr>
+  <center>
+  <h1>Contact</h1>
+  <p>cell 8111008037  mail:rajamohancyber@gmail.com</p>
+    </center>
+  </body>
+</html>
+
+
+
+
+
+table
+
+<table border 1>
+  <td>
+    <td>name</td>  <td>age</td>
+  </tr>
+<td>
+    <td>Rajamohan</td>  <td>22</td>
+  </tr>
+<td>
+    <td>Niran</td>  <td>21</td>
+  </tr>
+
+</table>
+
+IPL team
+
+<center>
+  <h2>IPL Teams</>
+    
+<table border 1>
+  <tr>
+    <td>Tems</td>  <td>Captan</td> <td>age</td>
+  </tr>
+<tr>
+    <td>RCB</td>  <td>Virat Kholi</td><td>35</td
+  </tr>
+<tr>
+    <td>MI</td>  <td>Rohith</td><td>36</td
+  </tr>
+ <tr>
+    <td>CSK</td>  <td>Dhoni</td><td>40</td
+  </tr>
+  
+</table>
+  <p>winner is RCB </p>
+</center>
+
+
+
+
+form and table
+
+   <form>
+    <table>
+    <tr>
+      <td>Name</td> <td><input type="text"><td/><br>
+    </tr>
+    <tr>
+      <td>Email</td> <td><input type="text"><td/><br>
+    </tr>
+     <tr>
+      <td>Number</td> <td><input type="Number" placeholder="enter the number "><td/><br>
+    </td>
+    <tr>
+      <td>Department</td> <td><input type="python"><td/><br>
+    </td>
+     <tr>
+      <td> <input type="submit"> </td>       <td> <input type="Reset"> </td> <br>
+    </tr>
+  <tr>
+    <td>
+      <select>
+        <option> C program </option>
+         <option> python </option>
+         <option> SQL </option>
+        </select>   
+    </td>
+  </tr>
+    </table>
+  
+  </form> 
+
+
+
+
+
+
+
+  
+<title>
+  <h1>Register for a watch</h1>
+</title>
+<center>
+  <h2> register</h2>
+  <form>
+    <table>
+      <tr>
+        <td>Name</td ><td><input type="text"placeholder="name"></d>
+      </tr>
+    <tr>
+        <td>age</td ><td><input type="number"placeholder="age  "></d>
+      </tr>
+  <tr>
+        <td>gender</td >
+    <td> <input type="radio"name="gender">Male
+  <input type="radio"name="gender">Female
+                      </d>
+  <tr>
+    <td>Email</td> <td> <input type="text" placeholder="email"</td>
+  </tr>
+      </tr>
+    </table>
+  </form>
+  </center>
+  
+
+marquee animation
+
+  <marquee behavior="slide" direction="right">
+    <h2>Andheri King</h2>
+  </marquee>
+  <marquee behavior="alternate" direction="right">
+    <h3>Andheri King</h3>
+  </marquee>
+  <marquee behavior="" direction="left">
+    <h1>Andheri King</h1>
+  </marquee>
