@@ -1,0 +1,103 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #e74c3c;
+    --accent-color: #3498db;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+}
+ 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+ 
+.navbar-brand {
+    font-weight: 700;
+    color:aqua;
+}
+ 
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./Images/banner\ _watch2.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    margin-bottom: 30px;
+}
+ 
+.category-card {
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+}
+ 
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+ 
+.product-card {
+    border: none;
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+}
+ 
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+ 
+.brand-section {
+    padding: 40px 0;
+    background-color: white;
+    margin: 30px 0;
+    border-radius: 10px;
+}
+ 
+.cart-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+ 
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 40px 0;
+    margin-top: 50px;
+}
+ 
+.social-icons a {
+    color: white;
+    margin-right: 15px;
+    font-size: 1.5rem;
+}
+ 
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+ 
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+ 
+.badge-primary {
+    background-color: var(--primary-color);
+}
+ 
+.product-detail-image {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+ 
+.discount-badge 
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}

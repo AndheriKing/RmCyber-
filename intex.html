@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The TIME LINE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./Images/lo.ico">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-clock"></i> TIME LINE
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('home')">HOME</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
+                            WATCH TYPES
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('men')">MENS WATCHS</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('women')">WOMENS WATCHS</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('sports')">SPORTS WATCHS</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('smart')">SMART WATCHS</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('premium')">PREMUIUM WATCHS</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="brandsDropdown" role="button" data-bs-toggle="dropdown">
+                           BRANDS
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('seiko')">Seiko</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('tagheuer')">TAG Heuer</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('breitling')">Breitling</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('omega')">Omega</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('rolex')">Rolex</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('vacheron')">Vacheron Constantin</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('audemars')">Audemars Piguet</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('patek')">Patek Philippe</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('jaeger')">Jaeger-LeCoultre</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('cartier')">Cartier</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('about')">ABOUT AS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('contact')">CONTECTS</a>
+                    </li>
+                </ul>
+                
+                <form class="d-flex me-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="search..." id="searchInput">
+                        <button class="btn btn-outline-light" type="button" id="searchButton">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-2" onclick="showSection('cart')">
+                        <i class="fas fa-shopping-cart"></i> 
+                        <span class="badge bg-danger" id="cartCount">0</span>
+                    </a>
+                    <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fas fa-user"></i> log in
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+<hr>
+    <marquee bgcolor="khaki" behavior="" direction="left" scrollamount="15">
+    <h5 algin="justify" style="color:black;">
+      <b>Watch Sale </b>- Explore best deals on Rolex, Sonata, Fastract Watches and enjoy up to 60% off on the latest collection of watches for men and women. Free Shipping, EMI offers, COD, 7-days Return Policy.
+    </h5>
+      </marquee>
+
+    <div class="container">
+        <section id="home" class="content-section">
+
+            <div class="hero-section text-center mb-5" >
+                <h1 class="display-4 fw-bold">Wear the elegance of time</h1>
+                <p class="lead"><i>To Buy a Right Watch</i></p>
+                <a href="#" class="btn btn-primary btn-lg mt-3" onclick="showSection('products')">Right Now</a>
+            </div>
+
+            <section id="categories" class="mb-5">
+                <h2 class="mb-4">Watch Types</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card category-card">
+                            <img src="./Images/b1_Edge.jpg" class="card-img-top" alt="Men's Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Mens Watchs</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('men')">To See</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card category-card">
+                            <img src="./Images/b3_fastract.jpg" class="card-img-top" alt="Women's Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Womens Watchs</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('women')">To See</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card category-card">
+                            <img src="./Images/b4_Sonata.jpg" class="card-img-top" alt="Sports Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Sports Watchs</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('sports')">Too See</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card category-card">
+                            <img src="./Images/banner _watch3.jpg">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Smart Watchs</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('smart')">Too See</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card category-card">
+                            <img src="./Images/banner _watch4.jpg">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Premium Watches</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('premium')">Too See</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="featured-products" class="mb-5">
+                <h2 class="mb-4">Popular Products</h2>
+                <div class="row" id="featuredProductContainer">
+                    </div>
+            </section>
+
+            <section id="brands" class="mb-5">
+                <h2 class="mb-4">Popular Products</h2>
+                <div class="row text-center">
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="./Images/w1.webp" alt="Seiko" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="./Images/w2.webp" alt="TAG Heuer" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="./Images/w3.webp" alt="Breitling" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="./Images/banner _watch4.jpg" alt="Omega" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="./Images/b3_fastract.jpg" alt="Rolex" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="./Images/b6_Police_D.jpg" alt="Vacheron Constantin" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="products" class="content-section" style="display: none;">
+            <h2 class="mb-4">All Products</h2>
+            <div class="row" id="productContainer">
+                </div>
+        </section>
+
+        <section id="category" class="content-section" style="display: none;">
+            <h2 class="mb-4" id="categoryTitle">Categorys</h2>
+            <div class="row" id="categoryProductContainer">
+                </div>
+        </section>
+
+        <section id="brand" class="content-section" style="display: none;">
+            <h2 class="mb-4" id="brandTitle">Brands</h2>
+            <div class="row" id="brandProductContainer">
+                </div>
+        </section>
+
+        <section id="product-detail" class="content-section" style="display: none;">
+            <div class="row" id="productDetailContainer">
+                </div>
+        </section>
+
+        <section id="searchResults" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">Search Result</h2>
+            <div class="row" id="searchResultsContainer">
+                </div>
+        </section>
+
+        <section id="cart" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">My cart</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="cartItems">
+                                <p class="text-center" id="emptyCartMessage">Your cart is empty</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">கார்ட் சுருக்கம்</h5>
+                            <div class="d-flex justify-content-between">
+                                <span>Total:</span>
+                                <span id="cartTotal">₹0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Tax (18%):</span>
+                                <span id="cartTax">₹0.00</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between fw-bold">
+                                <span>Total Amount:</span>
+                                <span id="cartGrandTotal">₹0.00</span>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3" id="checkoutButton">Check Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">About Us</h2>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        Yanagu Orun Watch Project என்பது 2020 ஆம் ஆண்டில் நிறுவப்பட்ட ஒரு பிரீமியம் கடிகார விற்பனை நிறுவனமாகும். உலகின் மிகச் சிறந்த பிராண்ட் கடிகாரங்களை வாடிக்கையாளர்களுக்கு வழங்குவதே எங்கள் நோக்கமாகும்.
+                    </p>
+                    <p class="card-text">
+                        எங்கள் சேகரத்தில் Seiko, TAG Heuer, Breitling, Omega, Rolex உள்ளிட்ட பல பிரபலமான பிராண்டுகள் அடங்கும் . தரமான சேவை மற்றும் உத்திரவாதத்திற்காக எங்களை நம்பலாம்.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">Cantact Us</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Contact</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Time street, Chennai 600028, Tamilnadu</p>
+                            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                            <p><i class="fas fa-envelope"></i> thetimeline@gmail.com</p>
+                            <p><i class="fas fa-clock"></i> Monday - Saturday: 10:00 AM - 8:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Yanagu Orun Watc</h5>
+                    <p>Time is more imporance</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p>Email: thetimeline.com</p>
+                    <p>Phone: +91 98765 43210</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Social Media</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 Yanagu Orun Watch Project. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Log in</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Do you have no Account? <a href="#" id="showRegister">Creat new account</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">Full name</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerConfirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="registerConfirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already you have account? <a href="#" id="showLogin">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
