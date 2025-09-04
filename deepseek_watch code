@@ -1,0 +1,1309 @@
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yanagu Orun Watch Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./Images/banner\ _watch3.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 30px;
+        }
+        
+        .category-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card {
+            border: none;
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .brand-section {
+            padding: 40px 0;
+            background-color: white;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .product-detail-image {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-clock"></i> Yanagu Orun Watch Project
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('home')">முகப்பு</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
+                            வகைகள்
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('men')">ஆண்கள் கடிகாரங்கள்</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('women')">பெண்கள் கடிகாரங்கள்</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('sports')">ஸ்போர்ட்ஸ் கடிகாரங்கள்</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('smart')">ஸ்மார்ட் கடிகாரங்கள்</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategory('premium')">பிரீமியம் கடிகாரங்கள்</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="brandsDropdown" role="button" data-bs-toggle="dropdown">
+                            பிராண்டுகள்
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('seiko')">Seiko</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('tagheuer')">TAG Heuer</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('breitling')">Breitling</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('omega')">Omega</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('rolex')">Rolex</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('vacheron')">Vacheron Constantin</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('audemars')">Audemars Piguet</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('patek')">Patek Philippe</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('jaeger')">Jaeger-LeCoultre</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showBrand('cartier')">Cartier</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('about')">எங்களைப் பற்றி</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('contact')">தொடர்பு கொள்ள</a>
+                    </li>
+                </ul>
+                
+                <form class="d-flex me-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="தேடல்..." id="searchInput">
+                        <button class="btn btn-outline-light" type="button" id="searchButton">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-2" onclick="showSection('cart')">
+                        <i class="fas fa-shopping-cart"></i> 
+                        <span class="badge bg-danger" id="cartCount">0</span>
+                    </a>
+                    <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fas fa-user"></i> உள்நுழைய
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="content-section">
+            <!-- Hero Section -->
+            <div class="hero-section text-center mb-5">
+                <h1 class="display-4 fw-bold">காலத்தின் நேர்த்தியை அணிந்து கொள்ளுங்கள்</h1>
+                <p class="lead">தரமான மற்றும் அழகான கடிகாரங்களின் சேகரம்</p>
+                <a href="#" class="btn btn-primary btn-lg mt-3" onclick="showSection('products')">இப்போது வாங்கவும்</a>
+            </div>
+
+            <!-- Categories Section -->
+            <section id="categories" class="mb-5">
+                <h2 class="mb-4">வகைகள்</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card category-card">
+                            <img src="https://images.unsplash.com/photo-1533139502658-0198f920d8e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Men's Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ஆண்கள் கடிகாரங்கள்</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('men')">பார்க்க</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card category-card">
+                            <img src="https://images.unsplash.com/photo-1547996160-81dfc11a902e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Women's Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">பெண்கள் கடிகாரங்கள்</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('women')">பார்க்க</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card category-card">
+                            <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Sports Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ஸ்போர்ட்ஸ் கடிகாரங்கள்</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('sports')">பார்க்க</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card category-card">
+                            <img src="https://images.unsplash.com/photo-1551816235-5d6c92c3911f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Smart Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">ஸ்மார்ட் கடிகாரங்கள்</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('smart')">பார்க்க</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card category-card">
+                            <img src="https://images.unsplash.com/photo-1609587240593-56403a5e5c8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Premium Watches">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">பிரீமியம் கடிகாரங்கள்</h5>
+                                <a href="#" class="btn btn-outline-primary" onclick="showCategory('premium')">பார்க்க</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products Section -->
+            <section id="featured-products" class="mb-5">
+                <h2 class="mb-4">பிரபலமான தயாரிப்புகள்</h2>
+                <div class="row" id="featuredProductContainer">
+                    <!-- Featured products will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Brand Sections -->
+            <section id="brands" class="mb-5">
+                <h2 class="mb-4">பிராண்டுகள்</h2>
+                <div class="row text-center">
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="https://logos-world.net/wp-content/uploads/2020/12/Seiko-Logo.png" alt="Seiko" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="https://logos-world.net/wp-content/uploads/2020/11/TAG-Heuer-Logo.png" alt="TAG Heuer" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="https://logos-world.net/wp-content/uploads/2020/11/Breitling-Logo.png" alt="Breitling" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="https://logos-world.net/wp-content/uploads/2020/11/Omega-Logo.png" alt="Omega" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="https://logos-world.net/wp-content/uploads/2020/12/Rolex-Logo.png" alt="Rolex" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <div class="brand-logo">
+                            <img src="https://logos-world.net/wp-content/uploads/2022/02/Vacheron-Constantin-Logo.png" alt="Vacheron Constantin" class="img-fluid" style="max-height: 70px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="content-section" style="display: none;">
+            <h2 class="mb-4">அனைத்து தயாரிப்புகள்</h2>
+            <div class="row" id="productContainer">
+                <!-- Products will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Category Section -->
+        <section id="category" class="content-section" style="display: none;">
+            <h2 class="mb-4" id="categoryTitle">வகை</h2>
+            <div class="row" id="categoryProductContainer">
+                <!-- Category products will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Brand Section -->
+        <section id="brand" class="content-section" style="display: none;">
+            <h2 class="mb-4" id="brandTitle">பிராண்ட்</h2>
+            <div class="row" id="brandProductContainer">
+                <!-- Brand products will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Product Detail Section -->
+        <section id="product-detail" class="content-section" style="display: none;">
+            <div class="row" id="productDetailContainer">
+                <!-- Product detail will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section id="searchResults" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">தேடல் முடிவுகள்</h2>
+            <div class="row" id="searchResultsContainer">
+                <!-- Search results will be displayed here -->
+            </div>
+        </section>
+
+        <!-- Shopping Cart -->
+        <section id="cart" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">எனது கார்ட்</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="cartItems">
+                                <!-- Cart items will be displayed here -->
+                                <p class="text-center" id="emptyCartMessage">உங்கள் கார்ட் காலியாக உள்ளது</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">கார்ட் சுருக்கம்</h5>
+                            <div class="d-flex justify-content-between">
+                                <span>மொத்தம்:</span>
+                                <span id="cartTotal">₹0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>வரி (18%):</span>
+                                <span id="cartTax">₹0.00</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between fw-bold">
+                                <span>மொத்த தொகை:</span>
+                                <span id="cartGrandTotal">₹0.00</span>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3" id="checkoutButton">செக்அவுட்</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">எங்களைப் பற்றி</h2>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        Yanagu Orun Watch Project என்பது 2020 ஆம் ஆண்டில் நிறுவப்பட்ட ஒரு பிரீமியம் கடிகார விற்பனை நிறுவனமாகும். உலகின் மிகச் சிறந்த பிராண்ட் கடிகாரங்களை வாடிக்கையாளர்களுக்கு வழங்குவதே எங்கள் நோக்கமாகும்.
+                    </p>
+                    <p class="card-text">
+                        எங்கள் சேகரத்தில் Seiko, TAG Heuer, Breitling, Omega, Rolex உள்ளிட்ட பல பிரபலமான பிராண்டுகள் அடங்கும் . தரமான சேவை மற்றும் உத்திரவாதத்திற்காக எங்களை நம்பலாம்.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section mb-5" style="display: none;">
+            <h2 class="mb-4">தொடர்பு கொள்ள</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">பெயர்</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">மின்னஞ்சல்</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">செய்தி</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">அனுப்பு</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">தொடர்பு தகவல்கள்</h5>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 கடிகாரம் தெரு, சென்னை, தமிழ்நாடு</p>
+                            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                            <p><i class="fas fa-envelope"></i> info@yanaguorun.com</p>
+                            <p><i class="fas fa-clock"></i> திங்கள் - சனி: 10:00 AM - 8:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Yanagu Orun Watch Project</h5>
+                    <p>காலத்தின் நேர்த்தியை அணிந்து கொள்ளுங்கள்</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>தொடர்புக்கு</h5>
+                    <p>மின்னஞ்சல்: info@yanaguorun.com</p>
+                    <p>தொலைபேசி: +91 98765 43210</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>சமூக ஊடகங்கள்</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 Yanagu Orun Watch Project. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">உள்நுழைவு</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">மின்னஞ்சல்</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">கடவுச்சொல்</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">உள்நுழைக</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>கணக்கு இல்லையா? <a href="#" id="showRegister">புதிய கணக்கை உருவாக்குக</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">புதிய கணக்கு</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">முழு பெயர்</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">மின்னஞ்சல்</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">கடவுச்சொல்</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerConfirmPassword" class="form-label">கடவுச்சொல்லை உறுதிப்படுத்துக</label>
+                            <input type="password" class="form-control" id="registerConfirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">கணக்கை உருவாக்குக</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>ஏற்கனவே கணக்கு உள்ளதா? <a href="#" id="showLogin">உள்நுழைக</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: "Seiko 5 Sports SSK001",
+                price: 475,
+                originalPrice: 550,
+                category: "men",
+                brand: "seiko",
+                image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "GMT function with in-house caliber 4R34 movement. Water resistant to 100m.",
+                features: ["Automatic Movement", "100m Water Resistance", "GMT Function", "Stainless Steel Case"]
+            },
+            {
+                id: 2,
+                name: "TAG Heuer Formula 1 Calibre 5",
+                price: 2000,
+                originalPrice: 2500,
+                category: "sports",
+                brand: "tagheuer",
+                image: "https://images.unsplash.com/photo-1539874754764-5a96559165b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Mechanical watch with reasonable price tag. Stainless steel with three-piece link bracelet.",
+                features: ["Swiss Made", "Calibre 5 Movement", "200m Water Resistance", "Sapphire Crystal"]
+            },
+            {
+                id: 3,
+                name: "Breitling Avenger Automatic 42",
+                price: 4750,
+                originalPrice: 5200,
+                category: "premium",
+                brand: "breitling",
+                image: "https://images.unsplash.com/photo-1609587240593-56403a5e5c8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "One of the most affordable models in the current Breitling range with excellent quality.",
+                features: ["Swiss Made", "42mm Case", "300m Water Resistance", "Super-LumiNova Hands"]
+            },
+            {
+                id: 4,
+                name: "Omega De Ville Prestige Co-Axial",
+                price: 5700,
+                originalPrice: 6200,
+                category: "premium",
+                brand: "omega",
+                image: "demo/Images/omega 1.png",
+                description: "Beautiful, classic men's watch with co-axial master chronometer 8800 caliber.",
+                features: ["Master Chronometer", "Co-Axial Escapement", "55-Hour Power Reserve", "Sapphire Crystal"]
+            },
+            {
+                id: 5,
+                name: "Rolex Oyster Perpetual",
+                price: 6700,
+                originalPrice: 7200,
+                category: "premium",
+                brand: "rolex",
+                image: "https://images.unsplash.com/photo-1622434641406-a158123450f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Classic Rolex look with diameters of 36 or 41 mm. The entry point into the Rolex world.",
+                features: ["Superlative Chronometer", "Oystersteel Case", "100m Water Resistance", "Perpetual Movement"]
+            },
+            {
+                id: 6,
+                name: "Smart Watch for Men & Women",
+                price: 199,
+                originalPrice: 249,
+                category: "smart",
+                brand: "other",
+                image: "https://images.unsplash.com/photo-1551816235-5d6c92c3911f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Bluetooth call and smart notifications. Comprehensive health tracking with multi-sport mode.",
+                features: ["Bluetooth Calling", "Health Monitoring", "Multiple Sports Modes", "7-Day Battery Life"]
+            },
+            {
+                id: 7,
+                name: "Vostok Amphibia",
+                price: 98,
+                originalPrice: 120,
+                category: "men",
+                brand: "other",
+                image: "https://images.unsplash.com/photo-1523170335258-f821aec2955e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Classic Russian dive watch known for its durability and unique design.",
+                features: ["Automatic Movement", "200m Water Resistance", "Luminous Hands", "Stainless Steel Case"]
+            },
+            {
+                id: 8,
+                name: "Samsung Galaxy Watch",
+                price: 250,
+                originalPrice: 299,
+                category: "smart",
+                brand: "other",
+                image: "https://images.unsplash.com/photo-1585123334904-845d60e97b29?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Start your wellness journey with comprehensive health monitoring and fitness tracking.",
+                features: ["Health Monitoring", "GPS Tracking", "Bluetooth", "Long Battery Life"]
+            },
+            {
+                id: 9,
+                name: "Cartier Tank Solo",
+                price: 3200,
+                originalPrice: 3500,
+                category: "premium",
+                brand: "cartier",
+                image: "https://images.unsplash.com/photo-1611590238753-1a8993fc8f91?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Iconic rectangular watch with quartz movement and elegant design.",
+                features: ["Quartz Movement", "Sapphire Crystal", "Steel Case", "Leather Strap"]
+            },
+            {
+                id: 10,
+                name: "Audemars Piguet Royal Oak",
+                price: 18500,
+                originalPrice: 19500,
+                category: "premium",
+                brand: "audemars",
+                image: "https://images.unsplash.com/photo-1611590239004-10bdce1cb2f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Luxury sports watch with iconic octagonal bezel and integrated bracelet.",
+                features: ["Automatic Movement", "50m Water Resistance", "Stainless Steel", "Sapphire Crystal"]
+            },
+            {
+                id: 11,
+                name: "Women's Diamond Watch",
+                price: 1200,
+                originalPrice: 1500,
+                category: "women",
+                brand: "other",
+                image: "https://images.unsplash.com/photo-1548167074-503073a4b3a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Elegant women's watch with diamond markers and mother of pearl dial.",
+                features: ["Quartz Movement", "Diamond Markers", "Mother of Pearl Dial", "Stainless Steel"]
+            },
+            {
+                id: 12,
+                name: "Casio G-Shock",
+                price: 99,
+                originalPrice: 129,
+                category: "sports",
+                brand: "other",
+                image: "https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Rugged sports watch with shock resistance and multiple functions.",
+                features: ["Shock Resistant", "200m Water Resistance", "Stopwatch", "Backlight"]
+            }
+        ];
+
+        // Cart array to store added products
+        let cart = [];
+
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render featured products
+            renderFeaturedProducts();
+            
+            // Setup event listeners
+            document.getElementById('searchButton').addEventListener('click', handleSearch);
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+            
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Login successful!');
+                $('#loginModal').modal('hide');
+            });
+            
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+                
+                alert('Registration successful!');
+                $('#registerModal').modal('hide');
+            });
+            
+            document.getElementById('showRegister').addEventListener('click', function(e) {
+                e.preventDefault();
+                $('#loginModal').modal('hide');
+                $('#registerModal').modal('show');
+            });
+            
+            document.getElementById('showLogin').addEventListener('click', function(e) {
+                e.preventDefault();
+                $('#registerModal').modal('hide');
+                $('#loginModal').modal('show');
+            });
+            
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Your message has been sent successfully!');
+                document.getElementById('contactForm').reset();
+            });
+            
+            document.getElementById('checkoutButton').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                
+                alert('Order placed successfully! Thank you for your purchase.');
+                cart = [];
+                updateCartCount();
+                document.getElementById('cartItems').innerHTML = '<p class="text-center">உங்கள் கார்ட் காலியாக உள்ளது</p>';
+                document.getElementById('cartTotal').textContent = '₹0.00';
+                document.getElementById('cartTax').textContent = '₹0.00';
+                document.getElementById('cartGrandTotal').textContent = '₹0.00';
+            });
+        });
+
+        // Show a specific section and hide others
+        function showSection(sectionId) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show the requested section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // If showing products section, render all products
+            if (sectionId === 'products') {
+                renderAllProducts();
+            }
+        }
+
+        // Show products for a specific category
+        function showCategory(category) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show the category section
+            document.getElementById('category').style.display = 'block';
+            
+            // Set category title
+            const categoryTitles = {
+                'men': 'ஆண்கள் கடிகாரங்கள்',
+                'women': 'பெண்கள் கடிகாரங்கள்',
+                'sports': 'ஸ்போர்ட்ஸ் கடிகாரங்கள்',
+                'smart': 'ஸ்மார்ட் கடிகாரங்கள்',
+                'premium': 'பிரீமியம் கடிகாரங்கள்'
+            };
+            
+            document.getElementById('categoryTitle').textContent = categoryTitles[category];
+            
+            // Render category products
+            renderCategoryProducts(category);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Show products for a specific brand
+        function showBrand(brand) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show the brand section
+            document.getElementById('brand').style.display = 'block';
+            
+            // Set brand title
+            const brandTitles = {
+                'seiko': 'Seiko',
+                'tagheuer': 'TAG Heuer',
+                'breitling': 'Breitling',
+                'omega': 'Omega',
+                'rolex': 'Rolex',
+                'vacheron': 'Vacheron Constantin',
+                'audemars': 'Audemars Piguet',
+                'patek': 'Patek Philippe',
+                'jaeger': 'Jaeger-LeCoultre',
+                'cartier': 'Cartier'
+            };
+            
+            document.getElementById('brandTitle').textContent = brandTitles[brand];
+            
+            // Render brand products
+            renderBrandProducts(brand);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Show product detail
+        function showProductDetail(productId) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show the product detail section
+            document.getElementById('product-detail').style.display = 'block';
+            
+            // Render product detail
+            renderProductDetail(productId);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Render featured products
+        function renderFeaturedProducts() {
+            const featuredProductContainer = document.getElementById('featuredProductContainer');
+            featuredProductContainer.innerHTML = '';
+            
+            // Get 4 random products
+            const featuredProducts = [...products].sort(() => 0.5 - Math.random()).slice(0, 4);
+            
+            featuredProducts.forEach(product => {
+                const discount = Math.round((1 - product.price / product.originalPrice) * 100);
+                
+                const productCard = `
+                    <div class="col-md-3 mb-4">
+                        <div class="card product-card">
+                            <div class="position-relative">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                                ${discount > 0 ? `<div class="discount-badge">-${discount}%</div>` : ''}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description.substring(0, 60)}...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="card-text fw-bold mb-0">₹${product.price.toLocaleString()}</p>
+                                        ${product.originalPrice > product.price ? 
+                                            `<p class="card-text text-muted text-decoration-line-through mb-0">₹${product.originalPrice.toLocaleString()}</p>` : ''}
+                                    </div>
+                                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">கார்ட்டில் சேர்க்க</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                featuredProductContainer.innerHTML += productCard;
+            });
+            
+            // Add event listeners to Add to Cart buttons
+            document.querySelectorAll('#featuredProductContainer .add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+            
+            // Add event listeners to product cards for detail view
+            document.querySelectorAll('#featuredProductContainer .product-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('add-to-cart')) {
+                        const productId = parseInt(this.querySelector('.add-to-cart').getAttribute('data-id'));
+                        showProductDetail(productId);
+                    }
+                });
+            });
+        }
+
+        // Render all products
+        function renderAllProducts() {
+            const productContainer = document.getElementById('productContainer');
+            productContainer.innerHTML = '';
+            
+            products.forEach(product => {
+                const discount = Math.round((1 - product.price / product.originalPrice) * 100);
+                
+                const productCard = `
+                    <div class="col-md-3 mb-4">
+                        <div class="card product-card">
+                            <div class="position-relative">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                                ${discount > 0 ? `<div class="discount-badge">-${discount}%</div>` : ''}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description.substring(0, 60)}...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="card-text fw-bold mb-0">₹${product.price.toLocaleString()}</p>
+                                        ${product.originalPrice > product.price ? 
+                                            `<p class="card-text text-muted text-decoration-line-through mb-0">₹${product.originalPrice.toLocaleString()}</p>` : ''}
+                                    </div>
+                                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">கார்ட்டில் சேர்க்க</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                productContainer.innerHTML += productCard;
+            });
+            
+            // Add event listeners to Add to Cart buttons
+            document.querySelectorAll('#productContainer .add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+            
+            // Add event listeners to product cards for detail view
+            document.querySelectorAll('#productContainer .product-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('add-to-cart')) {
+                        const productId = parseInt(this.querySelector('.add-to-cart').getAttribute('data-id'));
+                        showProductDetail(productId);
+                    }
+                });
+            });
+        }
+
+        // Render category products
+        function renderCategoryProducts(category) {
+            const categoryProductContainer = document.getElementById('categoryProductContainer');
+            categoryProductContainer.innerHTML = '';
+            
+            const categoryProducts = products.filter(product => product.category === category);
+            
+            if (categoryProducts.length === 0) {
+                categoryProductContainer.innerHTML = '<p class="text-center">No products found in this category</p>';
+                return;
+            }
+            
+            categoryProducts.forEach(product => {
+                const discount = Math.round((1 - product.price / product.originalPrice) * 100);
+                
+                const productCard = `
+                    <div class="col-md-3 mb-4">
+                        <div class="card product-card">
+                            <div class="position-relative">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                                ${discount > 0 ? `<div class="discount-badge">-${discount}%</div>` : ''}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description.substring(0, 60)}...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="card-text fw-bold mb-0">₹${product.price.toLocaleString()}</p>
+                                        ${product.originalPrice > product.price ? 
+                                            `<p class="card-text text-muted text-decoration-line-through mb-0">₹${product.originalPrice.toLocaleString()}</p>` : ''}
+                                    </div>
+                                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">கார்ட்டில் சேர்க்க</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                categoryProductContainer.innerHTML += productCard;
+            });
+            
+            // Add event listeners to Add to Cart buttons
+            document.querySelectorAll('#categoryProductContainer .add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+            
+            // Add event listeners to product cards for detail view
+            document.querySelectorAll('#categoryProductContainer .product-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('add-to-cart')) {
+                        const productId = parseInt(this.querySelector('.add-to-cart').getAttribute('data-id'));
+                        showProductDetail(productId);
+                    }
+                });
+            });
+        }
+
+        // Render brand products
+        function renderBrandProducts(brand) {
+            const brandProductContainer = document.getElementById('brandProductContainer');
+            brandProductContainer.innerHTML = '';
+            
+            const brandProducts = products.filter(product => product.brand === brand);
+            
+            if (brandProducts.length === 0) {
+                brandProductContainer.innerHTML = '<p class="text-center">No products found for this brand</p>';
+                return;
+            }
+            
+            brandProducts.forEach(product => {
+                const discount = Math.round((1 - product.price / product.originalPrice) * 100);
+                
+                const productCard = `
+                    <div class="col-md-3 mb-4">
+                        <div class="card product-card">
+                            <div class="position-relative">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                                ${discount > 0 ? `<div class="discount-badge">-${discount}%</div>` : ''}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">${product.description.substring(0, 60)}...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="card-text fw-bold mb-0">₹${product.price.toLocaleString()}</p>
+                                        ${product.originalPrice > product.price ? 
+                                            `<p class="card-text text-muted text-decoration-line-through mb-0">₹${product.originalPrice.toLocaleString()}</p>` : ''}
+                                    </div>
+                                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">கார்ட்டில் சேர்க்க</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                brandProductContainer.innerHTML += productCard;
+            });
+            
+            // Add event listeners to Add to Cart buttons
+            document.querySelectorAll('#brandProductContainer .add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+            
+            // Add event listeners to product cards for detail view
+            document.querySelectorAll('#brandProductContainer .product-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('add-to-cart')) {
+                        const productId = parseInt(this.querySelector('.add-to-cart').getAttribute('data-id'));
+                        showProductDetail(productId);
+                    }
+                });
+            });
+        }
+
+        // Render product detail
+        function renderProductDetail(productId) {
+            const productDetailContainer = document.getElementById('productDetailContainer');
+            productDetailContainer.innerHTML = '';
+            
+            const product = products.find(p => p.id === productId);
+            
+            if (!product) {
+                productDetailContainer.innerHTML = '<p class="text-center">Product not found</p>';
+                return;
+            }
+            
+            const discount = Math.round((1 - product.price / product.originalPrice) * 100);
+            
+            const productDetail = `
+                <div class="col-md-6">
+                    <img src="${product.image}" class="img-fluid product-detail-image" alt="${product.name}">
+                </div>
+                <div class="col-md-6">
+                    <h2>${product.name}</h2>
+                    <div class="d-flex align-items-center mb-3">
+                        <h3 class="text-primary me-3">₹${product.price.toLocaleString()}</h3>
+                        ${product.originalPrice > product.price ? 
+                            `<del class="text-muted me-2">₹${product.originalPrice.toLocaleString()}</del>
+                             <span class="badge bg-danger">-${discount}%</span>` : ''}
+                    </div>
+                    <p class="mb-4">${product.description}</p>
+                    
+                    <h4 class="mb-3">அம்சங்கள்</h4>
+                    <ul class="mb-4">
+                        ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                    
+                    <div class="d-flex">
+                        <button class="btn btn-primary me-3 add-to-cart-detail" data-id="${product.id}">கார்ட்டில் சேர்க்க</button>
+                        <button class="btn btn-outline-primary buy-now-detail" data-id="${product.id}">இப்போது வாங்க</button>
+                    </div>
+                </div>
+            `;
+            
+            productDetailContainer.innerHTML = productDetail;
+            
+            // Add event listeners to buttons
+            document.querySelector('.add-to-cart-detail').addEventListener('click', function() {
+                addToCart(productId);
+            });
+            
+            document.querySelector('.buy-now-detail').addEventListener('click', function() {
+                addToCart(productId);
+                showSection('cart');
+            });
+        }
+
+        // Handle search functionality
+        function handleSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (searchTerm.trim() === '') {
+                alert('Please enter a search term');
+                return;
+            }
+            
+            const searchResults = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) || 
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm) ||
+                product.brand.toLowerCase().includes(searchTerm)
+            );
+            
+            const searchResultsContainer = document.getElementById('searchResultsContainer');
+            const searchResultsSection = document.getElementById('searchResults');
+            
+            searchResultsContainer.innerHTML = '';
+            
+            if (searchResults.length === 0) {
+                searchResultsContainer.innerHTML = '<p class="text-center">No products found matching your search</p>';
+            } else {
+                searchResults.forEach(product => {
+                    const discount = Math.round((1 - product.price / product.originalPrice) * 100);
+                    
+                    const productCard = `
+                        <div class="col-md-3 mb-4">
+                            <div class="card product-card">
+                                <div class="position-relative">
+                                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                                    ${discount > 0 ? `<div class="discount-badge">-${discount}%</div>` : ''}
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">${product.description.substring(0, 60)}...</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="card-text fw-bold mb-0">₹${product.price.toLocaleString()}</p>
+                                            ${product.originalPrice > product.price ? 
+                                                `<p class="card-text text-muted text-decoration-line-through mb-0">₹${product.originalPrice.toLocaleString()}</p>` : ''}
+                                        </div>
+                                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">கார்ட்டில் சேர்க்க</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    searchResultsContainer.innerHTML += productCard;
+                });
+                
+                // Add event listeners to Add to Cart buttons in search results
+                document.querySelectorAll('#searchResultsContainer .add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        addToCart(productId);
+                    });
+                });
+                
+                // Add event listeners to product cards for detail view
+                document.querySelectorAll('#searchResultsContainer .product-card').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        if (!e.target.classList.contains('add-to-cart')) {
+                            const productId = parseInt(this.querySelector('.add-to-cart').getAttribute('data-id'));
+                            showProductDetail(productId);
+                        }
+                    });
+                });
+            }
+            
+            // Show the search results section
+            showSection('searchResults');
+        }
+
+        // Add product to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            updateCartCount();
+            updateCartDisplay();
+            
+            alert(`${product.name} added to cart!`);
+        }
+
+        // Update cart count badge
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const cartTaxElement = document.getElementById('cartTax');
+            const cartGrandTotalElement = document.getElementById('cartGrandTotal');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-center">உங்கள் கார்ட் காலியாக உள்ளது</p>';
+                cartTotalElement.textContent = '₹0.00';
+                cartTaxElement.textContent = '₹0.00';
+                cartGrandTotalElement.textContent = '₹0.00';
+                return;
+            }
+            
+            cartItemsContainer.innerHTML = '';
+            
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = `
+                    <div class="cart-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <img src="${item.image}" alt="${item.name}" class="img-fluid">
+                            </div>
+                            <div class="col-md-4">
+                                <h6>${item.name}</h6>
+                            </div>
+                            <div class="col-md-2">
+                                <p>₹${item.price.toLocaleString()}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary decrease-quantity" data-id="${item.id}">-</button>
+                                    <input type="text" class="form-control text-center quantity-input" value="${item.quantity}" readonly>
+                                    <button class="btn btn-outline-secondary increase-quantity" data-id="${item.id}">+</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="fw-bold">₹${itemTotal.toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                cartItemsContainer.innerHTML += cartItem;
+            });
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === itemId);
+                    if (item) {
+                        item.quantity += 1;
+                        updateCartDisplay();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === itemId);
+                    if (item) {
+                        item.quantity -= 1;
+                        if (item.quantity === 0) {
+                            cart = cart.filter(i => i.id !== itemId);
+                        }
+                        updateCartCount();
+                        updateCartDisplay();
+                    }
+                });
+            });
+            
+            const tax = total * 0.18;
+            const grandTotal = total + tax;
+            
+            cartTotalElement.textContent = `₹${total.toLocaleString()}`;
+            cartTaxElement.textContent = `₹${tax.toLocaleString()}`;
+            cartGrandTotalElement.textContent = `₹${grandTotal.toLocaleString()}`;
+        }
+    </script>
+</body>
+</html>
