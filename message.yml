@@ -1,0 +1,41 @@
+---
+- name: Get hostname, notify users and power off system
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+    - name: Get hostname
+      command: hostname
+      register: hostname_output
+      changed_when: false
+
+    - name: Get current logged-in user
+      shell: "who | awk '{print $1}' | head -1"
+      register: user_output
+      changed_when: false
+
+    - name: Display system status
+      debug:
+        msg: "{{ inventory_hostname }} - {{ hostname_output.stdout }} is ONLINE - Logged in User: {{ user_output.stdout }}"
+
+    - name: Send wall message
+      shell: |
+        wall "🎉🎂 HAPPY BIRTHDAY KEERTHANA! 🎂🎉."
+      ignore_errors: yes
+
+    - name: Desktop notification
+      shell: |
+        USERNAME="{{ user_output.stdout }}"
+        USER_ID=$(id -u "$USERNAME")
+        export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
+
+        sudo -E -u "$USERNAME" notify-send \
+        "🎉🎂 HAPPY BIRTHDAY KEERTHANA! 🎂🎉" \
+        "May this year bring you happiness, success, and everything you wish for. And of course, lots of wishes & Love from Johi too! ❤️." \
+        --icon=dialog-warning \
+        --urgency=critical \
+        --expire-time=0
+      when: user_output.stdout != ""
+      ignore_errors: yes
+

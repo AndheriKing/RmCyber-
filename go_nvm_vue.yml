@@ -1,0 +1,177 @@
+---
+- name: Install Go + NVM + Node + Vue CLI
+  hosts: all
+  become: true
+  gather_facts: true
+
+  vars:
+    go_version: "1.23.12"
+    nvm_version: "v0.39.7"
+
+  tasks:
+
+    # ---------------- USER DETECTION ----------------
+
+    - name: Get hostname
+      command: hostname
+      register: hostname_output
+      changed_when: false
+
+    - name: Get current logged-in user
+      shell: "who | awk '{print $1}' | head -1"
+      register: user_output
+      changed_when: false
+
+    - name: Set user facts
+      set_fact:
+        LOGIN_USER: "{{ user_output.stdout }}"
+        LOGIN_HOME: "/home/{{ user_output.stdout }}"
+
+    - name: Get user primary group
+      shell: "id -gn {{ LOGIN_USER }}"
+      register: user_group
+      changed_when: false
+
+    - name: Display system status
+      debug:
+        msg: "{{ inventory_hostname }} - {{ hostname_output.stdout }} is ONLINE - User: {{ LOGIN_USER }}"
+
+    # ---------------- PREREQUISITES ----------------
+
+    - name: Install prerequisites
+      apt:
+        update_cache: yes
+        state: present
+        name:
+          - curl
+          - wget
+          - git
+          - build-essential
+          - ca-certificates
+
+    # ---------------- GO INSTALL ----------------
+
+    - name: Download Go
+      get_url:
+        url: "https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz"
+        dest: /tmp/go.tar.gz
+        mode: "0644"
+
+    - name: Remove old Go
+      file:
+        path: /usr/local/go
+        state: absent
+
+    - name: Extract Go
+      unarchive:
+        src: /tmp/go.tar.gz
+        dest: /usr/local
+        remote_src: true
+
+    - name: Add Go path to bashrc
+      blockinfile:
+        path: "{{ LOGIN_HOME }}/.bashrc"
+        create: true
+        marker: "# {mark} ANSIBLE_GO"
+        block: |
+          export PATH=$PATH:/usr/local/go/bin
+
+    # ---------------- NVM INSTALL ----------------
+
+    - name: Install NVM
+      become_user: "{{ LOGIN_USER }}"
+      shell: |
+        export HOME="{{ LOGIN_HOME }}"
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | bash
+      args:
+        executable: /bin/bash
+
+    - name: Verify NVM exists
+      stat:
+        path: "{{ LOGIN_HOME }}/.nvm/nvm.sh"
+      register: nvm_check
+
+    - name: Fail if NVM installation failed
+      fail:
+        msg: "NVM installation failed"
+      when: not nvm_check.stat.exists
+
+    # ---------------- NODE INSTALL ----------------
+
+    - name: Install Node 12
+      become_user: "{{ LOGIN_USER }}"
+      shell: |
+        export NVM_DIR="{{ LOGIN_HOME }}/.nvm"
+        source "$NVM_DIR/nvm.sh"
+        nvm install 12
+      args:
+        executable: /bin/bash
+
+    - name: Install Node 20
+      become_user: "{{ LOGIN_USER }}"
+      shell: |
+        export NVM_DIR="{{ LOGIN_HOME }}/.nvm"
+        source "$NVM_DIR/nvm.sh"
+        nvm install 20
+      args:
+        executable: /bin/bash
+
+    - name: Set default Node version
+      become_user: "{{ LOGIN_USER }}"
+      shell: |
+        export NVM_DIR="{{ LOGIN_HOME }}/.nvm"
+        source "$NVM_DIR/nvm.sh"
+        nvm alias default 12
+        nvm use 12
+      args:
+        executable: /bin/bash
+
+    # ---------------- VUE CLI ----------------
+
+    - name: Install Vue CLI
+      become_user: "{{ LOGIN_USER }}"
+      shell: |
+        export NVM_DIR="{{ LOGIN_HOME }}/.nvm"
+        source "$NVM_DIR/nvm.sh"
+
+        npm config set registry https://registry.npmjs.org/
+        npm install -g @vue/cli@4.5.13
+      args:
+        executable: /bin/bash
+
+    # ---------------- FIX OWNERSHIP (FIXED) ----------------
+
+    - name: Fix NVM ownership (safe for domain users)
+      file:
+        path: "{{ LOGIN_HOME }}/.nvm"
+        owner: "{{ LOGIN_USER }}"
+        group: "{{ user_group.stdout }}"
+        recurse: true
+
+    # ---------------- VERIFY ----------------
+
+    - name: Verify installation
+      become_user: "{{ LOGIN_USER }}"
+      shell: |
+        export NVM_DIR="{{ LOGIN_HOME }}/.nvm"
+        source "$NVM_DIR/nvm.sh"
+
+        nvm use 12 >/dev/null
+
+        echo "================================="
+        echo "USER : {{ LOGIN_USER }}"
+        echo "HOME : {{ LOGIN_HOME }}"
+        echo "GROUP: {{ user_group.stdout }}"
+        echo "================================="
+
+        go version
+        node -v
+        npm -v
+        vue --version
+      args:
+        executable: /bin/bash
+      register: verify_result
+
+    - name: Show output
+      debug:
+        var: verify_result.stdout_lines

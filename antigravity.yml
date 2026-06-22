@@ -1,0 +1,63 @@
+---
+- name: Install Antigravity
+  hosts: clients
+  become: yes
+
+  tasks:
+
+    - name: Capture start time
+      set_fact:
+        start_time: "{{ lookup('pipe', 'date +%Y-%m-%d_%H:%M:%S') }}"
+
+    - name: Start log file
+      copy:
+        dest: /tmp/antigravity_install.log
+        content: |
+          ===== ANTIGRAVITY INSTALL LOG =====
+          Start Time: {{ start_time }}
+          ===================================
+
+    - name: Install curl if not present
+      apt:
+        name: curl
+        state: present
+        update_cache: yes
+
+    - name: Create keyrings directory
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+
+    - name: Download and add GPG key
+      shell: |
+        curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | \
+        gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg
+
+    - name: Add repository
+      copy:
+        dest: /etc/apt/sources.list.d/antigravity.list
+        content: |
+          deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install antigravity
+      apt:
+        name: antigravity
+        state: present
+
+    - name: Capture end time
+      set_fact:
+        end_time: "{{ lookup('pipe', 'date +%Y-%m-%d_%H:%M:%S') }}"
+
+    - name: Append end time to log
+      lineinfile:
+        path: /tmp/antigravity_install.log
+        line: |
+          ===================================
+          End Time: {{ end_time }}
+          Status: Installation Completed
+          ===================================

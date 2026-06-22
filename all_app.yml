@@ -1,0 +1,73 @@
+---
+- name: Install common applications
+  hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Capture start time
+      set_fact:
+        start_time: "{{ lookup('pipe', 'date +%Y-%m-%d_%H:%M:%S') }}"
+
+    - name: Show playbook start time
+      debug:
+        msg: "Playbook started at {{ start_time }}"
+
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+
+    - name: Download Google Chrome
+      get_url:
+        url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        dest: /tmp/google-chrome.deb
+
+    - name: Install Google Chrome
+      apt:
+        deb: /tmp/google-chrome.deb
+
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    - name: Install snapd
+      apt:
+        name: snapd
+        state: present
+
+    - name: Install VS Code
+      snap:
+        name: code
+        classic: yes
+        state: present
+
+    - name: Install DBeaver
+      snap:
+        name: dbeaver-ce
+        classic: yes
+        state: present
+
+    - name: Install Postman
+      snap:
+        name: postman
+        state: present
+
+    - name: Remove chrome installer
+      file:
+        path: /tmp/google-chrome.deb
+        state: absent
+
+    - name: Capture end time
+      set_fact:
+        end_time: "{{ lookup('pipe', 'date +%Y-%m-%d_%H:%M:%S') }}"
+
+    - name: Show playbook end time
+      debug:
+        msg: "Playbook ended at {{ end_time }}"
+
+    - name: Show total execution info
+      debug:
+        msg:
+          - "Start Time : {{ start_time }}"
+          - "End Time   : {{ end_time }}"

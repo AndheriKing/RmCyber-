@@ -1,0 +1,53 @@
+---
+- name: Warn users and power off system after 10 seconds
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+    - name: Get hostname
+      command: hostname
+      register: hostname_output
+      changed_when: false
+
+    - name: Get current logged-in user
+      shell: "who | awk '{print $1}' | head -1"
+      register: user_output
+      changed_when: false
+
+    - name: Display system status
+      debug:
+        msg: "{{ inventory_hostname }} - {{ hostname_output.stdout }} is ONLINE - Logged in User: {{ user_output.stdout }}"
+
+    - name: Send wall message to all logged-in users
+      shell: |
+        wall "⚠️ SYSTEM WILL BE POWERED OFF IN 10 SECONDS. Please save your work immediately."
+      ignore_errors: yes
+
+    - name: Show desktop notification
+      shell: |
+        USERNAME="{{ user_output.stdout }}"
+        USER_ID=$(id -u "$USERNAME")
+        export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
+        sudo -E -u "$USERNAME" notify-send \
+          "⚠️ System Warning" \
+          "⚠️ System will be powered off in 15 minutes. Please save your work immediately and contact IT INFRA ⚠️." \
+          --icon=dialog-warning \
+          --urgency=critical
+      when: user_output.stdout != ""
+      ignore_errors: yes
+
+    - name: Show status
+      debug:
+        msg: "Warning message sent to {{ user_output.stdout }}"
+      when: user_output.stdout != ""
+
+    - name: Wait 900 seconds
+      pause:
+        seconds: 900
+
+    - name: Power off the system
+      command: poweroff
+      async: 1
+      poll: 0
+      ignore_errors: yes

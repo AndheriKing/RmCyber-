@@ -1,0 +1,51 @@
+---
+- name: Install FlutterFire CLI for logged-in user
+  hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Get logged-in user from who command
+      shell: who | awk 'NR==1 {print $1}'
+      register: login_user
+      changed_when: false
+
+    - name: Get home directory of logged-in user
+      shell: "getent passwd {{ login_user.stdout }} | cut -d: -f6"
+      register: user_home
+      changed_when: false
+
+    - name: Show detected user
+      debug:
+        msg: "Logged in user is {{ login_user.stdout }}"
+
+    - name: Install firebase-tools globally
+      shell: npm install -g firebase-tools
+
+    - name: Activate flutterfire_cli
+      become_user: "{{ login_user.stdout }}"
+      shell: |
+        dart pub global activate flutterfire_cli
+      environment:
+        HOME: "{{ user_home.stdout }}"
+
+    - name: Add pub-cache path to .bashrc
+      lineinfile:
+        path: "{{ user_home.stdout }}/.bashrc"
+        line: 'export PATH="$PATH":"$HOME/.pub-cache/bin"'
+        create: yes
+        state: present
+      become_user: "{{ login_user.stdout }}"
+
+    - name: Check FlutterFire version
+      become_user: "{{ login_user.stdout }}"
+      shell: |
+        export PATH="$PATH:$HOME/.pub-cache/bin"
+        flutterfire --version
+      environment:
+        HOME: "{{ user_home.stdout }}"
+      register: flutterfire_version
+
+    - name: Display FlutterFire version
+      debug:
+        var: flutterfire_version.stdout
